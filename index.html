@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Coffee Shop of MLOps</title>
+  <!-- Bootstrap CSS -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-9ndCyUa1H0pC6Ce3wd4f6yb1/T0UWnHFr6tN0IXXH79710qogMnN0y3N5c5h9sZ" 
+    crossorigin="anonymous"
+  >
+  <!-- Animate.css for animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    body {
+      background: #f8f9fa;
+      color: #343a40;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .hero-section {
+      background: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1080&q=80')
+        no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .start-button {
+      font-size: 1.2rem;
+      padding: 10px 25px;
+      border-radius: 25px;
+    }
+
+    #onboarding-container {
+      display: none;
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .step-content {
+      transition: opacity 0.7s ease-in-out;
+      opacity: 0;
+      display: none;
+    }
+
+    .step-content.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .step-card {
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    .step-title {
+      font-size: 1.75rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .category-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .badge-concept {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      display: inline-block;
+      padding: 0.5em 0.75em;
+      border-radius: 50px;
+    }
+    .badge-coffee {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .badge-ml {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    .concept-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin: 20px 0 10px;
+    }
+
+    .step-text {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .step-image {
+      max-width: 100px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nav-buttons {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .nav-buttons .btn {
+      margin: 0 5px;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      padding: 10px 20px;
+    }
+
+    .progress-info {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar-container {
+      margin-bottom: 30px;
+    }
+
+    .two-col {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    @media(min-width: 768px) {
+      .two-col {
+        flex-direction: row;
+      }
+      .col-concept {
+        flex: 1;
+      }
+      .col-concept:not(:last-child) {
+        border-right: 2px dashed #ddd;
+        padding-right: 30px;
+        margin-right: 30px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Landing / Hero Section -->
+  <div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content animate__animated animate__fadeInUp">
+      <h1>The Coffee Shop of MLOps</h1>
+      <p>Embark on a comprehensive journey through every detail of the Data Science & MLOps lifecycle, guided by the coffee-making analogy.</p>
+      <button class="btn btn-warning start-button" id="start-btn">Start Your Journey</button>
+    </div>
+  </div>
+
+  <!-- Onboarding Steps -->
+  <div id="onboarding-container">
+    <div class="progress-info">
+      <div class="progress-bar-container">
+        <div class="progress" style="height: 20px; border-radius:10px;">
+          <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%; background:#007bff;"
+            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+      Step <span class="progress-step" id="current-step">1</span> of <span id="total-steps"></span>
+    </div>
+
+    <div id="steps-container"></div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="prev-btn" disabled>← Previous</button>
+      <button class="btn btn-primary" id="next-btn">Next →</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+6c5Ni9Eum1M4c2e74FxN7MjU4c+s"
+    crossorigin="anonymous">
+  </script>
+  <script>
+    // Inline steps data: each object represents a single sub-step
+    const stepsData = [
+      // 1. Sourcing & Data Governance (3 steps)
+      {
+        categoryTitle: "Sourcing & Data Governance",
+        title: "Coffee Bean Origins (Data Sourcing & Governance)",
+        image: "https://images.unsplash.com/photo-1515023115689-589c33041d3c?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Coffee Bean Origins",
+        coffeeConceptText: "Beans come from various farms with different qualities. Ethical sourcing and ensuring proper standards is crucial.",
+        mlConceptTitle: "Data Sourcing & Governance",
+        mlConceptText: "Data from multiple sources must be trustworthy. Governance, quality checks, and compliance ensure data is usable and safe."
+      },
+      {
+        categoryTitle: "Sourcing & Data Governance",
+        title: "Supply Chain Tracking (Data Lineage & Versioning)",
+        image: "https://images.unsplash.com/photo-1515023115689-589c33041d3c?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Supply Chain Tracking",
+        coffeeConceptText: "Importers track bean batches by harvest date, farm, and variety, ensuring traceability and quality.",
+        mlConceptTitle: "Data Lineage & Versioning",
+        mlConceptText: "Track data origin, changes, and versions so you can reproduce results and maintain compliance."
+      },
+      {
+        categoryTitle: "Sourcing & Data Governance",
+        title: "Compliance and Regulations (Data Privacy & Security)",
+        image: "https://images.unsplash.com/photo-1515023115689-589c33041d3c?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Compliance & Regulations",
+        coffeeConceptText: "Bean imports follow trade regulations and health checks. You never serve contaminated beans.",
+        mlConceptTitle: "Data Privacy & Security",
+        mlConceptText: "ML data must comply with GDPR/HIPAA and ensure privacy. Just as contaminated beans are avoided, unsafe data is never served."
+      },
+
+      // 2. Pre-Processing & Preparation (2 steps)
+      {
+        categoryTitle: "Pre-Processing & Preparation",
+        title: "Roasting the Beans (Data Cleaning & Transformation)",
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Roasting the Beans",
+        coffeeConceptText: "Roasting beans unlocks their flavor. Poorly roasted beans make bad coffee.",
+        mlConceptTitle: "Data Cleaning & Transformation",
+        mlConceptText: "Cleaning and transforming data ensures it's ready for the model. Poor data leads to poor results."
+      },
+      {
+        categoryTitle: "Pre-Processing & Preparation",
+        title: "Grinding to Perfect Granularity (Feature Engineering)",
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Perfect Grind Size",
+        coffeeConceptText: "Different brew methods need different grind sizes, optimizing flavor extraction.",
+        mlConceptTitle: "Feature Engineering",
+        mlConceptText: "Selecting and transforming features optimizes model performance, just as the right grind optimizes flavor."
+      },
+
+      // 3. Data Infrastructure & Tooling (2 steps)
+      {
+        categoryTitle: "Data Infrastructure & Tooling",
+        title: "Storage & Packaging (Data Lakes, Warehouses, Version Control)",
+        image: "https://images.unsplash.com/photo-1515121427923-118ae392f6b4?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Proper Storage",
+        coffeeConceptText: "Beans stored in controlled conditions stay fresh and consistent.",
+        mlConceptTitle: "Data Lakes, Warehouses & VC",
+        mlConceptText: "Storing data in lakes/warehouses with version control ensures consistent, accessible, fresh data anytime."
+      },
+      {
+        categoryTitle: "Data Infrastructure & Tooling",
+        title: "Equipment Maintenance (IaC, Reproducible Environments)",
+        image: "https://images.unsplash.com/photo-1515121427923-118ae392f6b4?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Machine Upkeep",
+        coffeeConceptText: "Well-maintained espresso machines and grinders ensure quality coffee every time.",
+        mlConceptTitle: "Infrastructure as Code & CI/CD",
+        mlConceptText: "Maintaining reproducible environments via IaC and automation ensures stable, repeatable ML operations."
+      },
+
+      // 4. Model Development (3 steps)
+      {
+        categoryTitle: "Model Development",
+        title: "Espresso Machine Calibration (Model Architecture & Tuning)",
+        image: "https://images.unsplash.com/photo-1475700747088-32c949f05a4e?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Machine Calibration",
+        coffeeConceptText: "Baristas tune pressure, temperature, and extraction time for perfect espresso.",
+        mlConceptTitle: "Model Architecture & Hyperparameters",
+        mlConceptText: "Choosing the right model and tuning parameters ensures top performance."
+      },
+      {
+        categoryTitle: "Model Development",
+        title: "Trial Runs & Tasting Sessions (Experiment Tracking & Validation)",
+        image: "https://images.unsplash.com/photo-1475700747088-32c949f05a4e?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Tasting & Adjusting",
+        coffeeConceptText: "Baristas taste test shots, making small tweaks until the flavor is just right.",
+        mlConceptTitle: "Experiment Tracking & Validation",
+        mlConceptText: "Data scientists run experiments, track results (MLflow/W&B), and validate models before production."
+      },
+      {
+        categoryTitle: "Model Development",
+        title: "Team Collaboration (Code Reviews & Knowledge Sharing)",
+        image: "https://images.unsplash.com/photo-1475700747088-32c949f05a4e?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Shared Craft",
+        coffeeConceptText: "Multiple baristas learn from each other, share best practices, and refine the coffee-making process.",
+        mlConceptTitle: "Collaboration & Reviews",
+        mlConceptText: "Code reviews, documentation, and team communication improve model quality and reduce errors."
+      },
+
+      // 5. Model Packaging & Deployment (3 steps)
+      {
+        categoryTitle: "Model Packaging & Deployment",
+        title: "The Coffee Cup (Model Containerization)",
+        image: "https://images.unsplash.com/photo-1534801022021-2c314a668e8c?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "The Coffee Cup",
+        coffeeConceptText: "A perfect espresso still needs a proper cup to be served conveniently.",
+        mlConceptTitle: "Containerization",
+        mlConceptText: "Packaging models (e.g., Docker) makes them portable and easy to serve in any environment."
+      },
+      {
+        categoryTitle: "Model Packaging & Deployment",
+        title: "Menu & Serving Size Standards (API Endpoints)",
+        image: "https://images.unsplash.com/photo-1534801022021-2c314a668e8c?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Standardized Recipes",
+        coffeeConceptText: "A café’s menu and cup sizes ensure customers know exactly what to expect.",
+        mlConceptTitle: "API Endpoints & Predictive Services",
+        mlConceptText: "Stable APIs define inputs/outputs. Users know how to interact with the model, ensuring consistency."
+      },
+      {
+        categoryTitle: "Model Packaging & Deployment",
+        title: "Barista Workflow Automation (CI/CD Pipelines)",
+        image: "https://images.unsplash.com/photo-1534801022021-2c314a668e8c?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Automated Machines",
+        coffeeConceptText: "Automated espresso machines ensure consistent quality at scale.",
+        mlConceptTitle: "CI/CD Pipelines",
+        mlConceptText: "Automated build, test, and deploy pipelines speed up releases and reduce human errors."
+      },
+
+      // 6. Monitoring & Maintenance (3 steps)
+      {
+        categoryTitle: "Monitoring & Maintenance",
+        title: "Measuring Coffee Quality (Model Performance Metrics)",
+        image: "https://images.unsplash.com/photo-1532131419483-c8c2cdfdfaa1?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Measuring Quality",
+        coffeeConceptText: "Baristas regularly taste coffee and check the crema, adjusting if needed.",
+        mlConceptTitle: "Performance Metrics & Monitoring",
+        mlConceptText: "Track accuracy, F1-scores, and business KPIs over time to ensure models stay effective."
+      },
+      {
+        categoryTitle: "Monitoring & Maintenance",
+        title: "Temperature & Pressure Gauges (Model Drift Detection)",
+        image: "https://images.unsplash.com/photo-1532131419483-c8c2cdfdfaa1?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Gauges & Meters",
+        coffeeConceptText: "Monitoring pressure and water temperature prevents spoiled coffee.",
+        mlConceptTitle: "Data/Concept Drift Detection",
+        mlConceptText: "Monitor model inputs, outputs, and resource usage. Detect drift early to prevent degraded results."
+      },
+      {
+        categoryTitle: "Monitoring & Maintenance",
+        title: "Customer Feedback & Iteration (User Feedback Loops)",
+        image: "https://images.unsplash.com/photo-1532131419483-c8c2cdfdfaa1?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Listening to Customers",
+        coffeeConceptText: "If coffee is too bitter, baristas adjust the recipe based on feedback.",
+        mlConceptTitle: "Feedback Loops & A/B Testing",
+        mlConceptText: "Incorporate user feedback and run A/B tests to guide continuous improvement of the model."
+      },
+
+      // 7. Scaling, Governance, Lifecycle (4 steps)
+      {
+        categoryTitle: "Scaling & Governance",
+        title: "Opening Multiple Cafés (Scaling ML Infrastructure)",
+        image: "https://images.unsplash.com/photo-1534682305784-a1505f70b3a2?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Multiple Locations",
+        coffeeConceptText: "Expanding from one café to many requires standardized processes.",
+        mlConceptTitle: "Scaling ML Systems",
+        mlConceptText: "Robust MLOps pipelines handle multiple models, teams, and geographies without losing quality."
+      },
+      {
+        categoryTitle: "Scaling & Governance",
+        title: "Brand Consistency & Guidelines (Model Registry & Governance)",
+        image: "https://images.unsplash.com/photo-1534682305784-a1505f70b3a2?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Brand Guidelines",
+        coffeeConceptText: "Franchises follow brand standards so every cappuccino tastes similar worldwide.",
+        mlConceptTitle: "Model Registry & Policies",
+        mlConceptText: "Model registries and governance ensure all deployed models meet performance and compliance standards."
+      },
+      {
+        categoryTitle: "Scaling & Governance",
+        title: "Staff Training & Skill Development (Team Upskilling)",
+        image: "https://images.unsplash.com/photo-1534682305784-a1505f70b3a2?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Trained Staff",
+        coffeeConceptText: "All baristas are trained to maintain quality and consistency.",
+        mlConceptTitle: "Upskilling & Best Practices",
+        mlConceptText: "Continuous learning, workshops, and internal guidelines ensure the ML team stays at the cutting edge."
+      },
+      {
+        categoryTitle: "Scaling & Governance",
+        title: "Supply Chain Reliability & Strategic Partnerships (Vendors & Cloud)",
+        image: "https://images.unsplash.com/photo-1534682305784-a1505f70b3a2?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Supply Chain Reliability",
+        coffeeConceptText: "Reliable bean suppliers and machine vendors ensure consistent operations.",
+        mlConceptTitle: "Vendor Management & Tooling",
+        mlConceptText: "Choosing stable cloud providers, ML frameworks, and monitoring tools ensures long-term reliability."
+      },
+
+      // 8. Ethics & Responsible AI (3 steps)
+      {
+        categoryTitle: "Ethics & Responsible AI",
+        title: "Fair Trade Certification (Ethical & Responsible AI)",
+        image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Fair Trade Coffee",
+        coffeeConceptText: "Ethically sourced beans respect farmers and meet customers' values.",
+        mlConceptTitle: "Ethical & Responsible AI",
+        mlConceptText: "Auditing models for bias, ensuring fairness and transparency builds trust in AI solutions."
+      },
+      {
+        categoryTitle: "Ethics & Responsible AI",
+        title: "Customer Health and Safety (Security & Privacy)",
+        image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Health & Safety",
+        coffeeConceptText: "Cafés must follow health regulations so customers stay safe.",
+        mlConceptTitle: "Security & Privacy",
+        mlConceptText: "Protecting user data and following privacy laws prevents breaches and maintains trust."
+      },
+      {
+        categoryTitle: "Ethics & Responsible AI",
+        title: "Artisanal vs. Mass-Produced Blends (Explainability & Complexity)",
+        image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Artisanal Flavors",
+        coffeeConceptText: "Some customers value understanding the complex flavor notes of single-origin coffees.",
+        mlConceptTitle: "Explainability Tools",
+        mlConceptText: "Complex models need tools like LIME/SHAP so stakeholders can understand decisions."
+      },
+
+      // 9. End-of-Life & Model Retirement (1 step)
+      {
+        categoryTitle: "End-of-Life & Model Retirement",
+        title: "Rotating the Menu (Model Retirement & Archival)",
+        image: "https://images.unsplash.com/photo-1535317631807-e7faf4f2d7eb?auto=format&fit=crop&w=200&q=80",
+        coffeeConceptTitle: "Seasonal Blends",
+        coffeeConceptText: "Old coffee blends are rotated out and new seasonal flavors come in.",
+        mlConceptTitle: "Model Retirement & Archival",
+        mlConceptText: "When models become obsolete, retire and archive them, ensuring you can reference them if needed."
+      }
+    ];
+
+    let currentStep = 1;
+    const totalSteps = stepsData.length;
+
+    document.getElementById('total-steps').textContent = totalSteps;
+
+    document.getElementById('start-btn').addEventListener('click', () => {
+      document.querySelector('.hero-section').style.display = 'none';
+      document.getElementById('onboarding-container').style.display = 'block';
+      renderSteps();
+      showStep(currentStep);
+    });
+
+    function renderSteps() {
+      const stepsContainer = document.getElementById('steps-container');
+      stepsContainer.innerHTML = '';
+
+      stepsData.forEach((step, index) => {
+        const stepNumber = index + 1;
+        const stepDiv = document.createElement('div');
+        stepDiv.classList.add('step-content');
+        stepDiv.setAttribute('data-step', stepNumber);
+
+        stepDiv.innerHTML = `
+          <div class="step-card animate__animated">
+            <div class="category-title">${step.categoryTitle}</div>
+            <img src="${step.image}" alt="Step ${stepNumber} Image" class="step-image" />
+            <h2 class="step-title">${step.title}</h2>
+            <div class="two-col">
+              <div class="col-concept">
+                <span class="badge badge-concept badge-coffee">Coffee Shop Concept</span>
+                <div class="concept-title">${step.coffeeConceptTitle}</div>
+                <p class="step-text">${step.coffeeConceptText}</p>
+              </div>
+              <div class="col-concept">
+                <span class="badge badge-concept badge-ml">Data Science / MLOps Equivalent</span>
+                <div class="concept-title">${step.mlConceptTitle}</div>
+                <p class="step-text">${step.mlConceptText}</p>
+              </div>
+            </div>
+          </div>
+        `;
+
+        stepsContainer.appendChild(stepDiv);
+      });
+    }
+
+    function showStep(step) {
+      const steps = document.querySelectorAll('.step-content');
+      steps.forEach(s => s.classList.remove('active', 'animate__fadeInRight', 'animate__fadeInLeft'));
+
+      const currentElement = document.querySelector(`.step-content[data-step="${step}"]`);
+      currentElement.classList.add('active', 'animate__fadeInRight');
+
+      document.getElementById('prev-btn').disabled = (step === 1);
+      document.getElementById('next-btn').textContent = (step === totalSteps) ? 'Finish' : 'Next →';
+      document.getElementById('current-step').textContent = step;
+
+      const progress = (step / totalSteps) * 100;
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.style.width = progress + '%';
+      progressBar.setAttribute('aria-valuenow', step);
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        alert('Congratulations! You have completed the comprehensive MLOps coffee journey!');
+      }
+    });
+  </script>
+</body>
+</html>
