@@ -165,14 +165,19 @@
       margin-bottom: 15px;
     }
 
-    .step-image {
-      width: 150px;
+    .step-image-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      overflow: hidden;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
+    }
+
+    .step-image {
+      width: 100%;
+      height: auto;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
       transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
     }
@@ -240,6 +245,76 @@
       }
     }
 
+    /* Add styles for conclusion page */
+    .conclusion-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .conclusion-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #4b2f24;
+      margin-bottom: 30px;
+    }
+
+    .conclusion-image-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 30px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .conclusion-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .conclusion-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #555;
+      margin: 30px 0;
+    }
+
+    .learning-points {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0;
+    }
+
+    .learning-points li {
+      padding: 15px 20px;
+      margin: 10px 0;
+      background: #f8f9fa;
+      border-left: 4px solid #4b2f24;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .restart-button {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      background: #4b2f24;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .restart-button:hover {
+      background: #8b5d3b;
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 <body>
@@ -293,545 +368,544 @@
     // The `example` field is added to some steps to illustrate usage.
 
     const stepsDataEN = [
-      // 1. Sourcing & Data Governance (3 steps)
-      {
-        categoryTitle: "Sourcing & Data Governance",
-        title: "Coffee Bean Origins (Data Sourcing & Governance)",
-        image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Coffee Bean Origins 🌱",
-        coffeeConceptText: "Your beans come from diverse farms. Ethical sourcing ensures quality and sustainability.",
-        mlConceptTitle: "Data Sourcing & Governance 📊",
-        mlConceptText: "Data may come from internal DBs, APIs, public datasets. Proper governance ensures trust.",
-      },
-      {
-        categoryTitle: "Sourcing & Data Governance",
-        title: "Supply Chain Tracking (Data Lineage & Versioning)",
-        image: "https://images.unsplash.com/photo-1582572991686-cc3f9681c96f?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Supply Chain Tracking 🔍",
-        coffeeConceptText: "Track beans by harvest date, farm, variety. If issues arise, you can pinpoint the source.",
-        mlConceptTitle: "Data Lineage & Versioning 🔧",
-        mlConceptText: "Keep track of dataset versions for reproducibility & compliance.",
-        example: "For example, if a model’s accuracy drops, roll back to previous data version to find the cause."
-      },
-      {
-        categoryTitle: "Sourcing & Data Governance",
-        title: "Compliance & Regulations (Data Privacy & Security)",
-        image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Compliance & Regulations ⚖️",
-        coffeeConceptText: "Meet fair-trade, health, and safety standards. No contaminated beans for customers!",
-        mlConceptTitle: "Data Privacy & Security 🔒",
-        mlConceptText: "Follow GDPR/HIPAA, anonymize PII, secure infrastructure.",
-        example: "Mask user IDs and encrypt data to maintain privacy."
-      },
+  // 1. Sourcing & Data Governance (3 steps)
+  {
+    categoryTitle: "Sourcing & Data Governance",
+    title: "Coffee Bean Origins (Data Sourcing & Governance)",
+    image: "https://hetalshomemade.com/cdn/shop/articles/A_guide_to_Coffee_Beans_5.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Coffee Bean Origins 🌱",
+    coffeeConceptText: "Your beans aren’t just random beans! They come from specific farms with unique climates, soil conditions, and growing practices. Ethically sourced beans mean farmers are treated fairly and the land is cared for, resulting in consistently tasty coffee and a clear conscience.",
+    mlConceptTitle: "Data Sourcing & Governance 📊",
+    mlConceptText: "Your ML data isn’t just a bunch of numbers. It’s collected from various places—internal databases, external APIs, or open datasets. Proper governance ensures data quality, compliance with regulations, and trust. Just like knowing the farm your beans come from, you know exactly where your data was sourced and how it can be used."
+  },
+  {
+    categoryTitle: "Sourcing & Data Governance",
+    title: "Supply Chain Tracking (Data Lineage & Versioning)",
+    image: "https://cbtl-images.s3.us-west-1.amazonaws.com/Production/Drupal/s3fs-public/styles/story_square_image/public/story-detail-images/our_people_believe.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Supply Chain Tracking 🔍",
+    coffeeConceptText: "Imagine you can trace each coffee bean back to its farm. If something tastes off, you know exactly where it came from. This level of tracking ensures that quality issues can be fixed at their source, making the entire process more reliable.",
+    mlConceptTitle: "Data Lineage & Versioning 🔧",
+    mlConceptText: "For ML, data lineage and versioning let you know exactly which dataset version was used to train a model. If your model’s performance slips, you can easily revert to a previous dataset version to pinpoint what changed and fix it. It’s like having a detailed map of your data’s journey.",
+    example: "For example, if your model’s accuracy suddenly drops after using a new dataset, roll back to the previous dataset version and compare what changed to find the cause."
+  },
+  {
+    categoryTitle: "Sourcing & Data Governance",
+    title: "Compliance & Regulations (Data Privacy & Security)",
+    image: "https://tracextech.com/wp-content/uploads/2024/09/eudr-coffee-compliance.png?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Compliance & Regulations ⚖️",
+    coffeeConceptText: "Just as coffee imports must follow health and trade rules to ensure no bad beans slip through, so must we follow standards to keep coffee safe and fair. No one wants spoiled beans—or unhappy customers!",
+    mlConceptTitle: "Data Privacy & Security 🔒",
+    mlConceptText: "In ML, complying with data privacy laws (like GDPR) and securing your data (like encrypting personal info) ensures users’ trust. It’s about keeping ‘bad beans’—like personal data leaks—out of your data pipeline, so everyone remains safe and confident.",
+    example: "For example, replacing user IDs with anonymous IDs keeps individuals’ info safe while still allowing analysis."
+  },
 
-      // 2. Pre-Processing & Preparation (2 steps)
-      {
-        categoryTitle: "Pre-Processing & Preparation",
-        title: "Roasting the Beans (Data Cleaning & Transformation)",
-        image: "https://images.unsplash.com/photo-1515007917926-2f37f2f78a26?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Roasting the Beans 🔥",
-        coffeeConceptText: "Roasting unlocks flavor. Just right = perfect coffee.",
-        mlConceptTitle: "Data Cleaning & Transformation 🧹",
-        mlConceptText: "Clean data (remove duplicates, fix missing values) & transform features.",
-        example: "Normalize numeric features or encode categories before training."
-      },
-      {
-        categoryTitle: "Pre-Processing & Preparation",
-        title: "Grinding to Perfect Granularity (Feature Engineering)",
-        image: "https://images.unsplash.com/photo-1594041680270-087bbb77c075?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Perfect Grind Size ☕️",
-        coffeeConceptText: "Espresso? Fine grind. French press? Coarse. Optimal extraction = great taste.",
-        mlConceptTitle: "Feature Engineering ⚙️",
-        mlConceptText: "Derive new features (day_of_week, user_segments) for better model insights.",
-        example: "Extract 'hour of day' from timestamps to capture daily patterns."
-      },
+  // 2. Pre-Processing & Preparation (2 steps)
+  {
+    categoryTitle: "Pre-Processing & Preparation",
+    title: "Roasting the Beans (Data Cleaning & Transformation)",
+    image: "https://blackturtlecoffee.com/cdn/shop/articles/developing-deeper-flavors-during-coffee-roasting-process.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Roasting the Beans 🔥",
+    coffeeConceptText: "Roasting brings out the bean’s hidden flavors, but it’s a delicate art. Roast too long, it’s bitter; not enough, it’s bland. The perfect roast creates a rich, delightful taste.",
+    mlConceptTitle: "Data Cleaning & Transformation 🧹",
+    mlConceptText: "Before training models, you must ‘roast’ your raw data. Remove duplicates, fix errors, handle missing values, and transform variables. Just like a well-roasted bean, well-prepared data leads to a richer and more accurate model.",
+    example: "For example, normalizing numeric features (like prices) ensures your model isn’t biased by large numbers."
+  },
+  {
+    categoryTitle: "Pre-Processing & Preparation",
+    title: "Grinding to Perfect Granularity (Feature Engineering)",
+    image: "https://majestycoffee.com/cdn/shop/articles/coffee_grinder_vintage.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Perfect Grind Size ☕️",
+    coffeeConceptText: "Different brew methods need different grind sizes for optimal flavor extraction. Fine for espresso, coarse for a French press. Getting the grind just right is key to a delicious cup.",
+    mlConceptTitle: "Feature Engineering ⚙️",
+    mlConceptText: "In ML, feature engineering is like choosing the perfect grind. You take raw data and create new, meaningful features that help the model ‘taste’ patterns better. It’s about finding the right level of detail so the model can perform at its best.",
+    example: "Extracting ‘hour of day’ from timestamps can help your model understand daily usage patterns."
+  },
 
-      // 3. Data Infrastructure & Tooling (2 steps)
-      {
-        categoryTitle: "Data Infrastructure & Tooling",
-        title: "Storage & Packaging (Data Lakes, Warehouses, VC)",
-        image: "https://images.unsplash.com/photo-1543352634-28098c5a083a?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Proper Storage 🌡️",
-        coffeeConceptText: "Store beans in controlled conditions to keep them fresh.",
-        mlConceptTitle: "Data Lakes & Version Control 📦",
-        mlConceptText: "Data lakes/warehouses + version control = consistent, accessible data.",
-        example: "Use DVC or Git LFS to track dataset versions."
-      },
-      {
-        categoryTitle: "Data Infrastructure & Tooling",
-        title: "Equipment Maintenance (IaC, Reproducible Environments)",
-        image: "https://images.unsplash.com/photo-1582213782179-6fb1e1f0bf6e?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Machine Upkeep 🔧",
-        coffeeConceptText: "Maintain espresso machines, grinders, filters regularly.",
-        mlConceptTitle: "IaC & CI/CD 🛠️",
-        mlConceptText: "Terraform, Docker, CI/CD ensure stable, reproducible ML environments.",
-        example: "Use IaC to spin up identical dev and prod clusters."
-      },
+  // 3. Data Infrastructure & Tooling (2 steps)
+  {
+    categoryTitle: "Data Infrastructure & Tooling",
+    title: "Storage & Packaging (Data Lakes, Warehouses, VC)",
+    image: "https://blog.genuineorigin.com/wp-content/uploads/2023/01/bags-of-green-coffee-in-roastery-by-kzenon.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Proper Storage 🌡️",
+    coffeeConceptText: "Storing coffee beans in climate-controlled rooms keeps them fresh and flavorful. Good storage prevents spoilage and ensures consistently great coffee.",
+    mlConceptTitle: "Data Lakes & Version Control 📦",
+    mlConceptText: "For ML, data lakes and warehouses neatly store all your data, while version control tools keep track of changes over time. It’s like having a well-organized pantry where you know what’s fresh, what’s old, and can easily find the ‘ingredients’ you need.",
+    example: "Use DVC or Git LFS to manage dataset versions, ensuring reproducibility."
+  },
+  {
+    categoryTitle: "Data Infrastructure & Tooling",
+    title: "Equipment Maintenance (IaC, Reproducible Environments)",
+    image: "https://espressoclinic.com/wp-content/uploads/2023/06/Victoria-Arduino-Eagle-Black-White-One-Service-London.png?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Machine Upkeep 🔧",
+    coffeeConceptText: "Regularly maintaining espresso machines and grinders ensures they work perfectly, serving consistently delicious coffee every time.",
+    mlConceptTitle: "IaC & CI/CD 🛠️",
+    mlConceptText: "Infrastructure as Code and continuous integration/delivery pipelines keep ML environments consistent. It’s like having a maintenance schedule for your equipment: everything runs smoothly, no ‘it works on my machine’ issues.",
+    example: "Use Terraform or Docker to replicate the same environment in dev and prod so models run identically everywhere."
+  },
 
-      // 4. Model Development (3 steps)
-      {
-        categoryTitle: "Model Development",
-        title: "Espresso Machine Calibration (Model Architecture & Tuning)",
-        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Machine Calibration ⚙️",
-        coffeeConceptText: "Adjust pressure, temperature for perfect espresso shots.",
-        mlConceptTitle: "Model Selection & Tuning 🤖",
-        mlConceptText: "Choose architectures (RF, NN) & tune hyperparams for best performance."
-      },
-      {
-        categoryTitle: "Model Development",
-        title: "Trial Runs & Tasting Sessions (Experiment Tracking & Validation)",
-        image: "https://images.unsplash.com/photo-1575626322483-2b421b0140c9?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Tasting & Adjusting 👅",
-        coffeeConceptText: "Baristas taste test shots, refine until flavor is perfect.",
-        mlConceptTitle: "Experiment Tracking & Validation 🎛️",
-        mlConceptText: "MLflow/W&B logs experiments, compare models on validation sets.",
-        example: "Check F1-scores of Model A vs Model B to pick the winner."
-      },
-      {
-        categoryTitle: "Model Development",
-        title: "Team Collaboration (Code Reviews & Knowledge Sharing)",
-        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Shared Expertise 🤝",
-        coffeeConceptText: "Baristas learn from each other, share brewing tips.",
-        mlConceptTitle: "Collaboration & Reviews 🏗️",
-        mlConceptText: "Code reviews, docs, and mentoring improve code quality and reduce errors."
-      },
+  // 4. Model Development (3 steps)
+  {
+    categoryTitle: "Model Development",
+    title: "Espresso Machine Calibration (Model Architecture & Tuning)",
+    image: "https://i0.wp.com/www.coffeellera.com/wp-content/uploads/2023/05/espresso-coffee-calibration.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Machine Calibration ⚙️",
+    coffeeConceptText: "Baristas tweak temperature, pressure, and timing to pull the perfect espresso shot. A few small adjustments can transform a bitter cup into a heavenly delight.",
+    mlConceptTitle: "Model Selection & Tuning 🤖",
+    mlConceptText: "Choosing the right ML model and tuning its hyperparameters is just like calibrating the espresso machine. A small change in learning rate or tree depth can mean the difference between a mediocre model and a top-performing one."
+  },
+  {
+    categoryTitle: "Model Development",
+    title: "Trial Runs & Tasting Sessions (Experiment Tracking & Validation)",
+    image: "https://www.shutterstock.com/image-photo/people-variety-coffee-beans-cups-260nw-385283932.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Tasting & Adjusting 👅",
+    coffeeConceptText: "Baristas taste multiple espresso shots, tweaking grind or dose until they hit the perfect flavor profile.",
+    mlConceptTitle: "Experiment Tracking & Validation 🎛️",
+    mlConceptText: "MLflow or Weights & Biases log every experiment, metric, and model version. By comparing metrics (like accuracy or F1-score), you pick the best ‘flavor’—the best model—before it goes into production.",
+    example: "Compare Model A and Model B on validation data to decide which one tastes best (performs better)."
+  },
+  {
+    categoryTitle: "Model Development",
+    title: "Team Collaboration (Code Reviews & Knowledge Sharing)",
+    image: "https://eu-images.contentstack.com/v3/assets/blt8770191dea35bccc/bltd2a571e38cbf8757/64d38b0f9c3e9e076ebd7a2b/Friends_20Coffee_20Bean_20and_20Tea_20Leaf.png?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Shared Expertise 🤝",
+    coffeeConceptText: "Baristas learn from each other’s techniques, swapping tips for better espresso and faster service.",
+    mlConceptTitle: "Collaboration & Reviews 🏗️",
+    mlConceptText: "Code reviews, documentation, and mentoring ensure everyone on the ML team learns best practices. This cooperative environment leads to higher-quality code and better models."
+  },
 
-      // 5. Model Packaging & Deployment (3 steps)
-      {
-        categoryTitle: "Model Packaging & Deployment",
-        title: "The Coffee Cup (Model Containerization)",
-        image: "https://images.unsplash.com/photo-1534801022021-2c314a668e8c?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "The Coffee Cup ☕",
-        coffeeConceptText: "A perfect espresso needs a proper cup to serve it.",
-        mlConceptTitle: "Containerization 🏷️",
-        mlConceptText: "Dockerize models for portability & consistent deployment."
-      },
-      {
-        categoryTitle: "Model Packaging & Deployment",
-        title: "Menu & Serving Size Standards (API Endpoints)",
-        image: "https://images.unsplash.com/photo-1559475908-12a28db19a92?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Standard Recipes 📏",
-        coffeeConceptText: "Menus define cup sizes & recipes, customers know what to expect.",
-        mlConceptTitle: "API Endpoints 🌐",
-        mlConceptText: "Stable APIs define inputs/outputs, making integration seamless.",
-        example: "POST /predict with JSON input, standardized output."
-      },
-      {
-        categoryTitle: "Model Packaging & Deployment",
-        title: "Barista Workflow Automation (CI/CD Pipelines)",
-        image: "https://images.unsplash.com/photo-1543490790-402e97332ee6?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Automated Machines 🤖",
-        coffeeConceptText: "Automation ensures consistent quality & faster service.",
-        mlConceptTitle: "CI/CD Pipelines 🔄",
-        mlConceptText: "Automate build, test, deploy. Update models quickly with fewer errors."
-      },
+  // 5. Model Packaging & Deployment (3 steps)
+  {
+    categoryTitle: "Model Packaging & Deployment",
+    title: "The Coffee Cup (Model Containerization)",
+    image: "https://images.unsplash.com/photo-1485821836693-0372f14be9c6?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "The Coffee Cup ☕",
+    coffeeConceptText: "Even the best espresso shot needs a suitable cup to hold it, making it easy and pleasant to serve and enjoy.",
+    mlConceptTitle: "Containerization 🏷️",
+    mlConceptText: "Containerizing your model (e.g., using Docker) ensures it runs smoothly anywhere. Just like a cup makes espresso portable, a container makes your model easy to deploy on different servers or clouds."
+  },
+  {
+    categoryTitle: "Model Packaging & Deployment",
+    title: "Menu & Serving Size Standards (API Endpoints)",
+    image: "https://metrobi.com/wp-content/uploads/2024/04/coffee-shop-menu.webp?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Standard Recipes 📏",
+    coffeeConceptText: "A café menu lists standardized coffee sizes and types, ensuring customers know what they’ll get every time.",
+    mlConceptTitle: "API Endpoints 🌐",
+    mlConceptText: "Defining clear API endpoints (like `/predict`) with fixed input/output formats lets other systems easily ‘order’ predictions, just like customers order their favorite drinks.",
+    example: "A POST request with JSON input returns consistent prediction output—no surprises!"
+  },
+  {
+    categoryTitle: "Model Packaging & Deployment",
+    title: "Barista Workflow Automation (CI/CD Pipelines)",
+    image: "https://www.beanscenemag.com.au/wp-content/uploads/2024/01/AdobeStock_301219859.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Automated Machines 🤖",
+    coffeeConceptText: "Automated espresso machines ensure each cup is consistently great, saving time and reducing human error.",
+    mlConceptTitle: "CI/CD Pipelines 🔄",
+    mlConceptText: "Continuous integration and continuous delivery pipelines automatically build, test, and deploy models. Like a robot barista, this lets you quickly refresh your models so they’re always performing at their best."
+  },
 
-      // 6. Monitoring & Maintenance (3 steps)
-      {
-        categoryTitle: "Monitoring & Maintenance",
-        title: "Measuring Coffee Quality (Model Performance Metrics)",
-        image: "https://images.unsplash.com/photo-1584981852019-3f7c1fbc4e2b?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Quality Checks ✅",
-        coffeeConceptText: "Baristas sample coffee throughout the day for consistency.",
-        mlConceptTitle: "Performance Metrics 📈",
-        mlConceptText: "Track accuracy, F1, revenue impact. Early detection of issues."
-      },
-      {
-        categoryTitle: "Monitoring & Maintenance",
-        title: "Temperature & Pressure Gauges (Model Drift Detection)",
-        image: "https://images.unsplash.com/photo-1601315327387-944fda1c8d36?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Gauges & Meters 🌡",
-        coffeeConceptText: "Monitor machine parameters to prevent bad coffee.",
-        mlConceptTitle: "Data/Concept Drift 🔭",
-        mlConceptText: "Monitor input distribution changes. Retrain if drift occurs."
-      },
-      {
-        categoryTitle: "Monitoring & Maintenance",
-        title: "Customer Feedback & Iteration (User Feedback Loops)",
-        image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Listening to Customers 🗣️",
-        coffeeConceptText: "If coffee is too bitter, adjust the roast or blend.",
-        mlConceptTitle: "Feedback & A/B Testing ♻️",
-        mlConceptText: "User feedback & A/B tests guide continuous improvement.",
-        example: "If users prefer predictions from Model C, adopt it permanently."
-      },
+  // 6. Monitoring & Maintenance (3 steps)
+  {
+    categoryTitle: "Monitoring & Maintenance",
+    title: "Measuring Coffee Quality (Model Performance Metrics)",
+    image: "https://loveoffood.sodexo.com/wp-content/uploads/2015/08/Coffee-PC-Measure_2048X970.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Quality Checks ✅",
+    coffeeConceptText: "Baristas taste coffee regularly to ensure it stays top-notch. If it’s off, they fix it fast.",
+    mlConceptTitle: "Performance Metrics 📈",
+    mlConceptText: "Accuracy, F1-score, and revenue impact are like the ‘taste tests’ for models. By keeping an eye on these metrics, you catch issues early and keep your model ‘fresh.’"
+  },
+  {
+    categoryTitle: "Monitoring & Maintenance",
+    title: "Temperature & Pressure Gauges (Model Drift Detection)",
+    image: "https://cdn.shopify.com/s/files/1/2425/8607/files/Profitec-Pro-600-Walnut-Espresso-Machine-11_1024x1024.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Gauges & Meters 🌡",
+    coffeeConceptText: "Café machines have gauges to ensure water temperature and pressure remain ideal. If it’s off, you adjust before the coffee tastes bad.",
+    mlConceptTitle: "Data/Concept Drift 🔭",
+    mlConceptText: "If the data your model sees changes over time (like shifting user behavior), your model may ‘go stale.’ Detecting drift is like watching the gauges: once something’s off, you retrain the model before quality suffers."
+  },
+  {
+    categoryTitle: "Monitoring & Maintenance",
+    title: "Customer Feedback & Iteration (User Feedback Loops)",
+    image: "https://koala.sh/api/image/v2-69gdr-625h7.jpg?width=1344&?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Listening to Customers 🗣️",
+    coffeeConceptText: "If customers say the coffee’s too bitter, you tweak the recipe. Customer feedback keeps your menu aligned with what people enjoy.",
+    mlConceptTitle: "Feedback & A/B Testing ♻️",
+    mlConceptText: "User feedback and A/B tests show what works best. If a new model version performs better in real-world conditions, you adopt it—just like adjusting a coffee recipe based on taste tests.",
+    example: "If Model C outperforms Model A in a live test, switch to Model C for better predictions."
+  },
 
-      // 7. Scaling & Governance (4 steps)
-      {
-        categoryTitle: "Scaling & Governance",
-        title: "Opening Multiple Cafés (Scaling ML Infrastructure)",
-        image: "https://images.unsplash.com/photo-1534682305784-a1505f70b3a2?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Multiple Locations 🏬",
-        coffeeConceptText: "From one café to many requires standardization & supply management.",
-        mlConceptTitle: "Robust MLOps Pipelines 🌍",
-        mlConceptText: "Scale models globally, handle multiple teams & regions seamlessly."
-      },
-      {
-        categoryTitle: "Scaling & Governance",
-        title: "Brand Consistency & Guidelines (Model Registry & Governance)",
-        image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Brand Guidelines 🏷️",
-        coffeeConceptText: "Franchises follow brand standards so every cappuccino tastes similar.",
-        mlConceptTitle: "Model Registry & Policies 📜",
-        mlConceptText: "Registries ensure all models meet performance & compliance thresholds.",
-        example: "Only deploy models passing 90% accuracy and privacy checks."
-      },
-      {
-        categoryTitle: "Scaling & Governance",
-        title: "Staff Training & Skill Development (Upskilling)",
-        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Trained Staff 👩‍🏫",
-        coffeeConceptText: "Well-trained baristas maintain quality consistently.",
-        mlConceptTitle: "Continuous Learning 🎓",
-        mlConceptText: "Workshops, mentoring, best practices keep ML teams sharp."
-      },
-      {
-        categoryTitle: "Scaling & Governance",
-        title: "Supply Chain Reliability & Strategic Partnerships (Vendors & Cloud)",
-        image: "https://images.unsplash.com/photo-1535317631807-e7faf4f2d7eb?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Reliable Suppliers 🚚",
-        coffeeConceptText: "Stable bean suppliers and machine vendors ensure no disruptions.",
-        mlConceptTitle: "Cloud & Tooling 🏗️",
-        mlConceptText: "Choose stable cloud providers, monitoring tools for long-term reliability."
-      },
+  // 7. Scaling & Governance (4 steps)
+  {
+    categoryTitle: "Scaling & Governance",
+    title: "Opening Multiple Cafés (Scaling ML Infrastructure)",
+    image: "https://images.startups.co.uk/wp-content/uploads/2009/10/28134644/How-to-start-a-caf%C3%A9-or-coffee-shop.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Multiple Locations 🏬",
+    coffeeConceptText: "Going from one café to a chain? You need consistent processes, reliable suppliers, and trained staff to maintain the same great taste everywhere.",
+    mlConceptTitle: "Robust MLOps Pipelines 🌍",
+    mlConceptText: "Scaling ML means handling multiple models and teams globally. Robust MLOps pipelines ensure everything runs smoothly, no matter how big you grow."
+  },
+  {
+    categoryTitle: "Scaling & Governance",
+    title: "Brand Consistency & Guidelines (Model Registry & Governance)",
+    image: "https://www.marketing91.com/wp-content/uploads/2018/07/Brand-consistency.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Brand Guidelines 🏷️",
+    coffeeConceptText: "A coffee franchise follows strict brand rules, so a cappuccino tastes the same in every branch.",
+    mlConceptTitle: "Model Registry & Policies 📜",
+    mlConceptText: "A model registry and governance policies ensure only top-quality, compliant models get deployed. It’s like having a global standard for model ‘taste.’",
+    example: "Only release models that pass certain accuracy and privacy checks, just like a café only serves coffee that meets quality standards."
+  },
+  {
+    categoryTitle: "Scaling & Governance",
+    title: "Staff Training & Skill Development (Upskilling)",
+    image: "https://perfectdailygrind.com/wp-content/uploads/2017/02/ally5-e1487353233101.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Trained Staff 👩‍🏫",
+    coffeeConceptText: "Skilled baristas know how to brew perfect coffee and handle customers. Training ensures quality and happy patrons.",
+    mlConceptTitle: "Continuous Learning 🎓",
+    mlConceptText: "ML teams benefit from workshops, internal knowledge sharing, and mentorship, ensuring they stay updated with the latest tools and techniques."
+  },
+  {
+    categoryTitle: "Scaling & Governance",
+    title: "Supply Chain Reliability & Strategic Partnerships (Vendors & Cloud)",
+    image: "https://icommunity.io/wp-content/uploads/2020/03/Cafe_blockchain.png?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Reliable Suppliers 🚚",
+    coffeeConceptText: "Steady bean suppliers ensure you never run out of quality beans. Stable partnerships mean no nasty surprises.",
+    mlConceptTitle: "Cloud & Tooling 🏗️",
+    mlConceptText: "Choosing reliable cloud providers, ML frameworks, and monitoring tools ensures your infrastructure never grinds to a halt, just like a café having a consistent coffee bean supply."
+  },
 
-      // 8. Ethics & Responsible AI (3 steps)
-      {
-        categoryTitle: "Ethics & Responsible AI",
-        title: "Fair Trade Certification (Ethical & Responsible AI)",
-        image: "https://images.unsplash.com/photo-1585802971133-209b8d581a58?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Fair Trade Coffee 🌍",
-        coffeeConceptText: "Ethically sourced beans respect farmers and the environment.",
-        mlConceptTitle: "Ethical AI & Fairness ⚖️",
-        mlConceptText: "Ensure no bias or discrimination in models.",
-        example: "Check for disparate impact across demographic groups."
-      },
-      {
-        categoryTitle: "Ethics & Responsible AI",
-        title: "Customer Health & Safety (Security & Privacy)",
-        image: "https://images.unsplash.com/photo-1591409713518-7b3e738c1b2e?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Health & Safety 🏥",
-        coffeeConceptText: "Follow health codes so coffee is safe to drink.",
-        mlConceptTitle: "Data Security & Privacy 🛡️",
-        mlConceptText: "Encrypt data, control access, ensure no data leaks."
-      },
-      {
-        categoryTitle: "Ethics & Responsible AI",
-        title: "Artisanal vs. Mass-Produced Blends (Explainability & Complexity)",
-        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Artisanal Flavors 🎨",
-        coffeeConceptText: "Some customers appreciate understanding complex flavor notes.",
-        mlConceptTitle: "Explainability Tools 🔬",
-        mlConceptText: "Use LIME/SHAP to explain complex models’ decisions."
-      },
+  // 8. Ethics & Responsible AI (3 steps)
+  {
+    categoryTitle: "Ethics & Responsible AI",
+    title: "Fair Trade Certification (Ethical & Responsible AI)",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwC5eI1it4wm2sO6FJPvEOW-F2EUN7qp1PhgDs2MzzG9qb21YbMOHzCS06CyO6v2llkSI&usqp=CAU?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Fair Trade Coffee 🌍",
+    coffeeConceptText: "Ethically sourced coffee respects farmers, pays them fairly, and protects the environment.",
+    mlConceptTitle: "Ethical AI & Fairness ⚖️",
+    mlConceptText: "Similarly, ML models must be fair and unbiased. Ethical AI ensures no group is unfairly treated, building trust and doing the right thing.",
+    example: "Check if your model treats all users fairly, regardless of demographics."
+  },
+  {
+    categoryTitle: "Ethics & Responsible AI",
+    title: "Customer Health & Safety (Security & Privacy)",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJCGljt4kVYED10RwkgDQAckMLfmuKN2AA0w&s?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Health & Safety 🏥",
+    coffeeConceptText: "Cafés follow health codes so customers never get sick from their latte.",
+    mlConceptTitle: "Data Security & Privacy 🛡️",
+    mlConceptText: "Secure your data so users aren’t exposed to risks. Encryption and access controls keep private info safe."
+  },
+  {
+    categoryTitle: "Ethics & Responsible AI",
+    title: "Artisanal vs. Mass-Produced Blends (Explainability & Complexity)",
+    image: "https://redmugcoffee.b-cdn.net/wp-content/uploads/Blog/Percolator-vs-Drip-Coffee-Maker/percolator-vs-drip-coffee-maker-2-768x512.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Artisanal Flavors 🎨",
+    coffeeConceptText: "Some coffee drinkers want to know the origin and subtle notes in their cup. Transparency adds to the experience.",
+    mlConceptTitle: "Explainability Tools 🔬",
+    mlConceptText: "For complex ML models (like deep neural nets), tools like LIME or SHAP help explain decisions. It’s like giving customers a flavor wheel, so they understand why the model made a certain prediction."
+  },
 
-      // 9. End-of-Life & Model Retirement (1 step)
-      {
-        categoryTitle: "End-of-Life & Model Retirement",
-        title: "Rotating the Menu (Model Retirement & Archival)",
-        image: "https://images.unsplash.com/photo-1600880292211-31ca5579f8e7?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Seasonal Blends 🍂",
-        coffeeConceptText: "When beans run out, rotate the menu, try new blends.",
-        mlConceptTitle: "Model Retirement & Archival 📦",
-        mlConceptText: "Retire obsolete models, archive them for reference.",
-        example: "Decommission a holiday sales model after the season ends."
-      },
+  // 9. End-of-Life & Model Retirement (1 step)
+  {
+    categoryTitle: "End-of-Life & Model Retirement",
+    title: "Rotating the Menu (Model Retirement & Archival)",
+    image: "https://i.ytimg.com/vi/X07aUwzANrU/maxresdefault.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Seasonal Blends 🍂",
+    coffeeConceptText: "Limited-edition coffees come and go. When the beans are gone, you introduce something new and exciting.",
+    mlConceptTitle: "Model Retirement & Archival 📦",
+    mlConceptText: "ML models don’t last forever. When data changes or better models come along, retire old ones and store them for reference. It’s like rotating your coffee menu with the seasons.",
+    example: "Turn off the holiday sales model after the holidays and keep it archived for next year’s review."
+  },
 
-      // 10. Continuous Innovation & Knowledge Management (2 steps)
-      {
-        categoryTitle: "Continuous Innovation & Knowledge Management",
-        title: "Exploring New Flavors (Testing New Model Architectures)",
-        image: "https://images.unsplash.com/photo-1551270101-0466f6c56f34?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "New Coffee Recipes ☕️✨",
-        coffeeConceptText: "Experiment with new beans, spices, methods to delight customers.",
-        mlConceptTitle: "New ML Architectures 🤖🌱",
-        mlConceptText: "Try cutting-edge models (Transformers, GNNs) for better performance.",
-        example: "After Random Forest success, try a BERT model for NLP."
-      },
-      {
-        categoryTitle: "Continuous Innovation & Knowledge Management",
-        title: "Documenting & Sharing Best Practices (Organizational Learning)",
-        image: "https://images.unsplash.com/photo-1535317631807-e7faf4f2d7eb?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Training Baristas & Recipes 📜",
-        coffeeConceptText: "Record procedures so new baristas learn quickly.",
-        mlConceptTitle: "Knowledge Management & Wikis 📚",
-        mlConceptText: "Document infra setups, coding standards, deployment guides.",
-        example: "Maintain an internal wiki detailing CI/CD pipeline steps."
-      }
-    ];
+  // 10. Continuous Innovation & Knowledge Management (2 steps)
+  {
+    categoryTitle: "Continuous Innovation & Knowledge Management",
+    title: "Exploring New Flavors (Testing New Model Architectures)",
+    image: "https://lovelypackage.com/wp-content/uploads/2024/05/9-droptt-lovely-package.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "New Coffee Recipes ☕️✨",
+    coffeeConceptText: "Always trying new beans, roasts, or brew methods keeps your menu fresh and customers happy.",
+    mlConceptTitle: "New ML Architectures 🤖🌱",
+    mlConceptText: "Experimenting with cutting-edge ML models (like Transformers) can boost performance. It’s all about staying ahead of the curve.",
+    example: "If Random Forests worked well, maybe try a BERT model to handle text data better."
+  },
+  {
+    categoryTitle: "Continuous Innovation & Knowledge Management",
+    title: "Documenting & Sharing Best Practices (Organizational Learning)",
+    image: "https://easyhealthandsafety.com/cdn/shop/files/friends-in-coffee-shop-enjoying-coffee-together.jpg?v=1697471310&width=3840?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Training Baristas & Recipes 📜",
+    coffeeConceptText: "Writing down your coffee recipes and training methods helps new baristas quickly learn the ropes, ensuring consistently great coffee.",
+    mlConceptTitle: "Knowledge Management & Wikis 📚",
+    mlConceptText: "Storing model deployment guides, coding standards, and infrastructure tips in a shared wiki helps your ML team onboard faster and avoid repeating mistakes.",
+    example: "Maintain a wiki page explaining how to set up a CI/CD pipeline so new team members can hit the ground running."
+  }
+  ];
 
-    // French version (abbreviated translations from the above)
-    const stepsDataFR = [
-      // 1. Approvisionnement & Gouvernance (3 steps)
-      {
-        categoryTitle: "Approvisionnement & Gouvernance des Données",
-        title: "Origine des Grains de Café (Collecte & Gouvernance)",
-        image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Origine des Grains 🌱",
-        coffeeConceptText: "Des fermes variées, une sélection éthique garantit qualité et durabilité.",
-        mlConceptTitle: "Collecte & Gouvernance des Données 📊",
-        mlConceptText: "Données internes, APIs, sources externes. La gouvernance assure la confiance."
-      },
-      {
-        categoryTitle: "Approvisionnement & Gouvernance des Données",
-        title: "Suivi de la Chaîne (Traçabilité & Versionnement)",
-        image: "https://images.unsplash.com/photo-1582572991686-cc3f9681c96f?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Traçabilité de la Chaîne 🔍",
-        coffeeConceptText: "Étiquetez les lots (date, ferme). En cas de souci, remontez à la source.",
-        mlConceptTitle: "Traçabilité & Versionnement 🔧",
-        mlConceptText: "Suivez l'évolution des données, conservez des versions.",
-        example: "Si la précision baisse, revenez à une version antérieure du jeu de données."
-      },
-      {
-        categoryTitle: "Approvisionnement & Gouvernance des Données",
-        title: "Conformité & Réglementations (Confidentialité & Sécurité)",
-        image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Conformité & Réglementations ⚖️",
-        coffeeConceptText: "Respectez les normes pour un café sain et équitable.",
-        mlConceptTitle: "Confidentialité & Sécurité des Données 🔒",
-        mlConceptText: "RGPD/HIPAA, anonymisation, sécurité.",
-        example: "Masquer les IDs utilisateurs, chiffrer les données."
-      },
+const stepsDataFR = [
+  // 1. Approvisionnement & Gouvernance (3 steps)
+  {
+    categoryTitle: "Approvisionnement & Gouvernance des Données",
+    title: "Origine des Grains de Café (Collecte & Gouvernance)",
+    image: "https://hetalshomemade.com/cdn/shop/articles/A_guide_to_Coffee_Beans_5.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Origine des Grains 🌱",
+    coffeeConceptText: "Vos grains proviennent de fermes différentes, chacune avec son propre terroir. Un approvisionnement éthique garantit une saveur constante et le respect des producteurs.",
+    mlConceptTitle: "Collecte & Gouvernance des Données 📊",
+    mlConceptText: "Vos données ML viennent de bases internes, d'APIs ou de sources publiques. Une bonne gouvernance assure qualité, conformité et confiance."
+  },
+  {
+    categoryTitle: "Approvisionnement & Gouvernance des Données",
+    title: "Suivi de la Chaîne (Traçabilité & Versionnement)",
+    image: "https://cbtl-images.s3.us-west-1.amazonaws.com/Production/Drupal/s3fs-public/styles/story_square_image/public/story-detail-images/our_people_believe.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Traçabilité de la Chaîne 🔍",
+    coffeeConceptText: "Pouvoir retracer chaque grain jusqu'à sa ferme d'origine vous permet de résoudre rapidement tout problème de qualité.",
+    mlConceptTitle: "Traçabilité & Versionnement 🔧",
+    mlConceptText: "En ML, suivre la version des données et leur origine permet de comprendre d'où vient chaque changement. Si les performances chutent, retournez à une ancienne version pour comparer.",
+    example: "Si la précision baisse soudainement, revenez à l'ensemble de données précédent pour voir ce qui a changé."
+  },
+  {
+    categoryTitle: "Approvisionnement & Gouvernance des Données",
+    title: "Conformité & Réglementations (Confidentialité & Sécurité)",
+    image: "https://tracextech.com/wp-content/uploads/2024/09/eudr-coffee-compliance.png?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Conformité & Réglementations ⚖️",
+    coffeeConceptText: "Comme le café doit respecter des normes sanitaires et équitables, vos données doivent suivre les règles pour assurer sécurité et équité.",
+    mlConceptTitle: "Confidentialité & Sécurité des Données 🔒",
+    mlConceptText: "Protégez la vie privée (RGPD, HIPAA), anonymisez les infos sensibles, et chiffrez les données. Ainsi, tout le monde est en sécurité.",
+    example: "Remplacez les IDs par des identifiants anonymes pour protéger la vie privée."
+  },
 
-      // 2. Préparation & Pré-traitement (2 steps)
-      {
-        categoryTitle: "Préparation & Pré-traitement",
-        title: "La Torréfaction (Nettoyage & Transformation)",
-        image: "https://images.unsplash.com/photo-1515007917926-2f37f2f78a26?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Torréfaction 🔥",
-        coffeeConceptText: "Relever les arômes. Ni trop amer, ni trop fade.",
-        mlConceptTitle: "Nettoyage & Transformation 🧹",
-        mlConceptText: "Nettoyer, normaliser, préparer les données pour le modèle.",
-        example: "Normaliser les variables numériques, encoder les catégories."
-      },
-      {
-        categoryTitle: "Préparation & Pré-traitement",
-        title: "Le Broyage Idéal (Feature Engineering)",
-        image: "https://images.unsplash.com/photo-1594041680270-087bbb77c075?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Mouture Parfaite ☕️",
-        coffeeConceptText: "Espresso = mouture fine, piston = mouture grossière.",
-        mlConceptTitle: "Feature Engineering ⚙️",
-        mlConceptText: "Extraire de nouvelles features pertinentes.",
-        example: "Extraire 'jour de la semaine' d'un horodatage."
-      },
+  // 2. Préparation & Pré-traitement (2 steps)
+  {
+    categoryTitle: "Préparation & Pré-traitement",
+    title: "La Torréfaction (Nettoyage & Transformation)",
+    image: "https://blackturtlecoffee.com/cdn/shop/articles/developing-deeper-flavors-during-coffee-roasting-process.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Torréfaction 🔥",
+    coffeeConceptText: "Torréfier les grains révèle leurs arômes. Un réglage précis évite l'amertume ou la fadeur.",
+    mlConceptTitle: "Nettoyage & Transformation 🧹",
+    mlConceptText: "En ML, nettoyer et transformer les données, c'est comme torréfier. On enlève les erreurs, normalise les variables, pour que le modèle ait des données pures.",
+    example: "Par exemple, normaliser les données pour éviter qu'un chiffre trop grand fausse le modèle."
+  },
+  {
+    categoryTitle: "Préparation & Pré-traitement",
+    title: "Le Broyage Idéal (Feature Engineering)",
+    image: "https://majestycoffee.com/cdn/shop/articles/coffee_grinder_vintage.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Mouture Parfaite ☕️",
+    coffeeConceptText: "Chaque méthode (espresso, piston) nécessite une mouture différente pour extraire le meilleur goût.",
+    mlConceptTitle: "Feature Engineering ⚙️",
+    mlConceptText: "Créer de nouvelles features utiles est comme ajuster la mouture. Vous affinez les données pour que le modèle détecte plus facilement les schémas.",
+    example: "Extraire 'l'heure de la journée' d'une date permet de comprendre les habitudes quotidiennes."
+  },
 
-      // 3. Infrastructures & Outils (2 steps)
-      {
-        categoryTitle: "Infrastructures & Outils",
-        title: "Stockage & Conditionnement (Lacs, Entrepôts, VC)",
-        image: "https://images.unsplash.com/photo-1543352634-28098c5a083a?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Stockage Approprié 🌡️",
-        coffeeConceptText: "Conserver les grains au frais.",
-        mlConceptTitle: "Lacs de Données & Versionnement 📦",
-        mlConceptText: "Lacs/entrepôts + contrôle de version = cohérence.",
-        example: "Utiliser DVC pour versionner vos datasets."
-      },
-      {
-        categoryTitle: "Infrastructures & Outils",
-        title: "Entretien de l'Équipement (IaC, Environnements Reproductibles)",
-        image: "https://images.unsplash.com/photo-1582213782179-6fb1e1f0bf6e?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Entretien de la Machine 🔧",
-        coffeeConceptText: "Calibrer, nettoyer la machine régulièrement.",
-        mlConceptTitle: "IaC & CI/CD 🛠️",
-        mlConceptText: "Terraform, Docker, pipelines CI/CD pour stabilité.",
-        example: "Définir l'infra avec IaC pour des environnements identiques."
-      },
+  // 3. Infrastructures & Outils (2 steps)
+  {
+    categoryTitle: "Infrastructures & Outils",
+    title: "Stockage & Conditionnement (Lacs, Entrepôts, VC)",
+    image: "https://blog.genuineorigin.com/wp-content/uploads/2023/01/bags-of-green-coffee-in-roastery-by-kzenon.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Stockage Approprié 🌡️",
+    coffeeConceptText: "Garder les grains dans de bonnes conditions assure une saveur constante.",
+    mlConceptTitle: "Lacs de Données & Versionnement 📦",
+    mlConceptText: "Les lacs de données et le versionnement garantissent un accès facile à des données cohérentes, comme un garde-manger bien rangé.",
+    example: "Utiliser DVC pour revenir à une version antérieure du jeu de données si nécessaire."
+  },
+  {
+    categoryTitle: "Infrastructures & Outils",
+    title: "Entretien de l'Équipement (IaC, Environnements Reproductibles)",
+    image: "https://espressoclinic.com/wp-content/uploads/2023/06/Victoria-Arduino-Eagle-Black-White-One-Service-London.png?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Entretien de la Machine 🔧",
+    coffeeConceptText: "Nettoyer et entretenir la machine garantit un espresso toujours délicieux.",
+    mlConceptTitle: "IaC & CI/CD 🛠️",
+    mlConceptText: "Infrastructure as Code et pipelines CI/CD rendent les environnements ML stables et reproductibles. Plus de 'ça marche chez moi'—tout est uniforme.",
+    example: "Utiliser Terraform ou Docker pour que l'environnement soit le même en dev et en prod."
+  },
 
-      // 4. Développement de Modèles (3 steps)
-      {
-        categoryTitle: "Développement de Modèles",
-        title: "Calibrage de la Machine (Architecture & Hyperparamètres)",
-        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Calibrage ⚙️",
-        coffeeConceptText: "Ajuster pression et température pour un espresso parfait.",
-        mlConceptTitle: "Choix du Modèle & Tuning 🤖",
-        mlConceptText: "Sélectionner l'architecture, régler hyperparams."
-      },
-      {
-        categoryTitle: "Développement de Modèles",
-        title: "Essais & Dégustations (Suivi & Validation)",
-        image: "https://images.unsplash.com/photo-1575626322483-2b421b0140c9?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Dégustations 👅",
-        coffeeConceptText: "Goûter plusieurs shots, affiner le résultat.",
-        mlConceptTitle: "Suivi d'Expériences & Validation 🎛️",
-        mlConceptText: "MLflow/W&B pour comparer les modèles.",
-        example: "Comparer F1 entre deux modèles et choisir le meilleur."
-      },
-      {
-        categoryTitle: "Développement de Modèles",
-        title: "Collaboration Équipe (Revue & Partage)",
-        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Expertise Partagée 🤝",
-        coffeeConceptText: "Les baristas échangent astuces et techniques.",
-        mlConceptTitle: "Collaboration & Revue 🏗️",
-        mlConceptText: "Revues de code, docs, mentorat pour une meilleure qualité."
-      },
+  // 4. Développement de Modèles (3 steps)
+  {
+    categoryTitle: "Développement de Modèles",
+    title: "Calibrage de la Machine (Architecture & Hyperparamètres)",
+    image: "https://www.shutterstock.com/image-photo/people-variety-coffee-beans-cups-260nw-385283932.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Calibrage ⚙️",
+    coffeeConceptText: "Ajuster température et pression de la machine pour un espresso parfait.",
+    mlConceptTitle: "Choix du Modèle & Tuning 🤖",
+    mlConceptText: "Sélectionner le bon type de modèle et régler ses hyperparamètres, c'est comme affiner la recette pour obtenir le meilleur résultat."
+  },
+  {
+    categoryTitle: "Développement de Modèles",
+    title: "Essais & Dégustations (Suivi & Validation)",
+    image: "https://www.shutterstock.com/image-photo/people-variety-coffee-beans-cups-260nw-385283932.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Dégustations 👅",
+    coffeeConceptText: "Goûter différents shots pour affiner la saveur.",
+    mlConceptTitle: "Suivi d'Expériences & Validation 🎛️",
+    mlConceptText: "MLflow/W&B consigne chaque essai, permettant de comparer facilement les modèles et choisir le meilleur.",
+    example: "Comparer deux modèles sur un ensemble de validation pour prendre le plus performant."
+  },
+  {
+    categoryTitle: "Développement de Modèles",
+    title: "Collaboration Équipe (Revue & Partage)",
+    image: "https://eu-images.contentstack.com/v3/assets/blt8770191dea35bccc/bltd2a571e38cbf8757/64d38b0f9c3e9e076ebd7a2b/Friends_20Coffee_20Bean_20and_20Tea_20Leaf.png?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Expertise Partagée 🤝",
+    coffeeConceptText: "Les baristas échangent astuces, améliorant la qualité du café.",
+    mlConceptTitle: "Collaboration & Revue 🏗️",
+    mlConceptText: "Les revues de code et la documentation aident l'équipe ML à apprendre mutuellement, garantissant un code propre et des modèles plus solides."
+  },
 
-      // 5. Packaging & Déploiement (3 steps)
-      {
-        categoryTitle: "Packaging & Déploiement",
-        title: "La Tasse (Containerisation)",
-        image: "https://images.unsplash.com/photo-1534801022021-2c314a668e8c?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "La Tasse ☕",
-        coffeeConceptText: "Un espresso parfait dans une tasse appropriée.",
-        mlConceptTitle: "Containerisation 🏷️",
-        mlConceptText: "Dockeriser le modèle pour un déploiement portable."
-      },
-      {
-        categoryTitle: "Packaging & Déploiement",
-        title: "Menu & Tailles Standard (API)",
-        image: "https://images.unsplash.com/photo-1559475908-12a28db19a92?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Recettes Standardisées 📏",
-        coffeeConceptText: "Le menu définit tailles et recettes.",
-        mlConceptTitle: "Endpoints API 🌐",
-        mlConceptText: "API stables (POST /predict) facilitent l'intégration.",
-        example: "Envoyer JSON, recevoir prédiction formatée."
-      },
-      {
-        categoryTitle: "Packaging & Déploiement",
-        title: "Automatisation du Flux (CI/CD)",
-        image: "https://images.unsplash.com/photo-1543490790-402e97332ee6?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Machines Automatisées 🤖",
-        coffeeConceptText: "Automatiser pour une qualité constante, service rapide.",
-        mlConceptTitle: "CI/CD 🔄",
-        mlConceptText: "Automatiser build, test, déploiement pour mises à jour rapides."
-      },
+  // 5. Packaging & Déploiement (3 steps)
+  {
+    categoryTitle: "Packaging & Déploiement",
+    title: "La Tasse (Containerisation)",
+    image: "https://images.unsplash.com/photo-1485821836693-0372f14be9c6?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "La Tasse ☕",
+    coffeeConceptText: "Même le meilleur espresso a besoin d'une tasse pour être servi.",
+    mlConceptTitle: "Containerisation 🏷️",
+    mlConceptText: "Mettre le modèle dans un conteneur facilite son déploiement partout, comme une tasse rend le café facilement transportable."
+  },
+  {
+    categoryTitle: "Packaging & Déploiement",
+    title: "Menu & Tailles Standard (API)",
+    image: "https://metrobi.com/wp-content/uploads/2024/04/coffee-shop-menu.webp?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Recettes Standardisées 📏",
+    coffeeConceptText: "Le menu indique clairement les options, les clients savent ce qu'ils obtiennent.",
+    mlConceptTitle: "Endpoints API 🌐",
+    mlConceptText: "Des endpoints bien définis (ex: /predict) précisent les entrées/sorties, simplifiant l'intégration dans d'autres systèmes.",
+    example: "Envoyer du JSON et recevoir une prédiction formatée, sans surprise."
+  },
+  {
+    categoryTitle: "Packaging & Déploiement",
+    title: "Automatisation du Flux (CI/CD)",
+    image: "https://www.beanscenemag.com.au/wp-content/uploads/2024/01/AdobeStock_301219859.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Machines Automatisées 🤖",
+    coffeeConceptText: "L’automatisation garantit une qualité uniforme et un service rapide.",
+    mlConceptTitle: "CI/CD 🔄",
+    mlConceptText: "Les pipelines CI/CD automatisent la construction, le test et le déploiement des modèles, permettant des mises à jour fréquentes sans effort manuel."
+  },
 
-      // 6. Surveillance & Maintenance (3 steps)
-      {
-        categoryTitle: "Surveillance & Maintenance",
-        title: "Mesurer la Qualité (Métriques de Performance)",
-        image: "https://images.unsplash.com/photo-1584981852019-3f7c1fbc4e2b?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Contrôles Qualité ✅",
-        coffeeConceptText: "Goûter le café régulièrement.",
-        mlConceptTitle: "Métriques de Performance 📈",
-        mlConceptText: "Suivre précision, F1, impact business."
-      },
-      {
-        categoryTitle: "Surveillance & Maintenance",
-        title: "Jauges Température & Pression (Drift)",
-        image: "https://images.unsplash.com/photo-1601315327387-944fda1c8d36?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Jauges & Capteurs 🌡",
-        coffeeConceptText: "Surveiller paramètres machine.",
-        mlConceptTitle: "Drift des Données 🔭",
-        mlConceptText: "Détecter les changements de distribution, réentraîner si besoin."
-      },
-      {
-        categoryTitle: "Surveillance & Maintenance",
-        title: "Retour Clients & Itération (Boucles de Feedback)",
-        image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Écouter les Clients 🗣️",
-        coffeeConceptText: "Si trop amer, ajuster la recette.",
-        mlConceptTitle: "Feedback & A/B Testing ♻️",
-        mlConceptText: "Utiliser retours utilisateurs, tests A/B.",
-        example: "Si les utilisateurs préfèrent le Modèle C, l'adopter."
-      },
+  // 6. Surveillance & Maintenance (3 steps)
+  {
+    categoryTitle: "Surveillance & Maintenance",
+    title: "Mesurer la Qualité (Métriques de Performance)",
+    image: "https://loveoffood.sodexo.com/wp-content/uploads/2015/08/Coffee-PC-Measure_2048X970.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Contrôles Qualité ✅",
+    coffeeConceptText: "Goûter régulièrement le café assure une saveur constante.",
+    mlConceptTitle: "Métriques de Performance 📈",
+    mlConceptText: "Précision, F1, impact business... Mesurer ces indicateurs permet d'identifier rapidement les problèmes."
+  },
+  {
+    categoryTitle: "Surveillance & Maintenance",
+    title: "Jauges Température & Pression (Drift)",
+    image: "https://cdn.shopify.com/s/files/1/2425/8607/files/Profitec-Pro-600-Walnut-Espresso-Machine-11_1024x1024.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Jauges & Capteurs 🌡",
+    coffeeConceptText: "Surveiller la température/pression évite de servir un mauvais café.",
+    mlConceptTitle: "Drift des Données 🔭",
+    mlConceptText: "Si les données changent, le modèle peut devenir moins efficace. Détecter le drift, c'est comme lire les jauges : on ajuste avant que ça ne devienne mauvais."
+  },
+  {
+    categoryTitle: "Surveillance & Maintenance",
+    title: "Retour Clients & Itération (Boucles de Feedback)",
+    image: "https://koala.sh/api/image/v2-69gdr-625h7.jpg?width=1344&?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Écouter les Clients 🗣️",
+    coffeeConceptText: "Si les clients trouvent le café trop amer, on ajuste la recette.",
+    mlConceptTitle: "Feedback & A/B Testing ♻️",
+    mlConceptText: "Les retours utilisateurs et les tests A/B guident l'amélioration continue du modèle.",
+    example: "Si le Modèle C plaît plus que le Modèle A, adopter le Modèle C."
+  },
 
-      // 7. Mise à l'Échelle & Gouvernance (4 steps)
-      {
-        categoryTitle: "Mise à l'Échelle & Gouvernance",
-        title: "Ouvrir Plusieurs Cafés (Évolutivité)",
-        image: "https://images.unsplash.com/photo-1534682305784-a1505f70b3a2?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Plusieurs Établissements 🏬",
-        coffeeConceptText: "De 1 café à une chaîne, normaliser les processus.",
-        mlConceptTitle: "Pipelines MLOps Robustes 🌍",
-        mlConceptText: "Gérer plusieurs modèles, équipes, régions sans souci."
-      },
-      {
-        categoryTitle: "Mise à l'Échelle & Gouvernance",
-        title: "Cohérence & Lignes Directrices (Model Registry)",
-        image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Directives de Marque 🏷️",
-        coffeeConceptText: "Des normes garantissent un goût similaire partout.",
-        mlConceptTitle: "Registry & Politiques 📜",
-        mlConceptText: "Un registre impose qualité, conformité.",
-        example: "Seuls les modèles >90% précision sont déployés."
-      },
-      {
-        categoryTitle: "Mise à l'Échelle & Gouvernance",
-        title: "Formation & Compétences (Upskilling)",
-        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Personnel Formé 👩‍🏫",
-        coffeeConceptText: "Des baristas formés maintiennent qualité.",
-        mlConceptTitle: "Apprentissage Continu 🎓",
-        mlConceptText: "Ateliers, mentorat, partage de bonnes pratiques."
-      },
-      {
-        categoryTitle: "Mise à l'Échelle & Gouvernance",
-        title: "Fiabilité & Partenariats (Fournisseurs, Cloud)",
-        image: "https://images.unsplash.com/photo-1535317631807-e7faf4f2d7eb?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Fournisseurs Fiables 🚚",
-        coffeeConceptText: "Des fournisseurs stables, pas de ruptures.",
-        mlConceptTitle: "Cloud & Outils 🏗️",
-        mlConceptText: "Choisir un cloud stable, outils de monitoring fiables."
-      },
+  // 7. Mise à l'Échelle & Gouvernance (4 steps)
+  {
+    categoryTitle: "Mise à l'Échelle & Gouvernance",
+    title: "Ouvrir Plusieurs Cafés (Évolutivité)",
+    image: "https://images.startups.co.uk/wp-content/uploads/2009/10/28134644/How-to-start-a-caf%C3%A9-or-coffee-shop.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Plusieurs Établissements 🏬",
+    coffeeConceptText: "Passer d'un seul café à une chaîne nécessite standardisation et bonne logistique.",
+    mlConceptTitle: "Pipelines MLOps Robustes 🌍",
+    mlConceptText: "Gérer plusieurs modèles et équipes globalement exige des pipelines solides, sans perdre en qualité."
+  },
+  {
+    categoryTitle: "Mise à l'Échelle & Gouvernance",
+    title: "Cohérence & Lignes Directrices (Model Registry)",
+    image: "https://www.marketing91.com/wp-content/uploads/2018/07/Brand-consistency.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Directives de Marque 🏷️",
+    coffeeConceptText: "Une marque cohérente garantit le même goût partout.",
+    mlConceptTitle: "Registry & Politiques 📜",
+    mlConceptText: "Un registre de modèles impose des seuils de qualité et de conformité avant le déploiement.",
+    example: "Déployer uniquement les modèles dépassant 90% de précision."
+  },
+  {
+    categoryTitle: "Mise à l'Échelle & Gouvernance",
+    title: "Formation & Compétences (Upskilling)",
+    image: "https://perfectdailygrind.com/wp-content/uploads/2017/02/ally5-e1487353233101.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Personnel Formé 👩‍🏫",
+    coffeeConceptText: "Des baristas bien formés maintiennent la qualité et la satisfaction client.",
+    mlConceptTitle: "Apprentissage Continu 🎓",
+    mlConceptText: "Ateliers, mentorat et partage d'infos gardent l'équipe ML à jour et performante."
+  },
+  {
+    categoryTitle: "Mise à l'Échelle & Gouvernance",
+    title: "Fiabilité & Partenariats (Fournisseurs, Cloud)",
+    image: "https://icommunity.io/wp-content/uploads/2020/03/Cafe_blockchain.png?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Fournisseurs Fiables 🚚",
+    coffeeConceptText: "Des fournisseurs stables assurent une offre continue de bons grains.",
+    mlConceptTitle: "Cloud & Outils 🏗️",
+    mlConceptText: "Choisir un cloud et des outils fiables évite les pannes, assurant une dispo constante."
+  },
 
-      // 8. Éthique & IA Responsable (3 steps)
-      {
-        categoryTitle: "Éthique & IA Responsable",
-        title: "Certification Commerce Équitable (AI Éthique)",
-        image: "https://images.unsplash.com/photo-1585802971133-209b8d581a58?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Café Équitable 🌍",
-        coffeeConceptText: "Sourcer éthiquement, respecter les agriculteurs.",
-        mlConceptTitle: "IA Éthique & Équitable ⚖️",
-        mlConceptText: "Pas de biais, pas de discrimination.",
-        example: "Vérifier l'impact sur différents groupes démographiques."
-      },
-      {
-        categoryTitle: "Éthique & IA Responsable",
-        title: "Santé & Sécurité Client (Sécurité & Confidentialité)",
-        image: "https://images.unsplash.com/photo-1591409713518-7b3e738c1b2e?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Santé & Sécurité 🏥",
-        coffeeConceptText: "Respecter normes sanitaires.",
-        mlConceptTitle: "Sécurité & Confidentialité 🛡️",
-        mlConceptText: "Chiffrer données, limiter accès, pas de fuite."
-      },
-      {
-        categoryTitle: "Éthique & IA Responsable",
-        title: "Artisanal vs Industriel (Explicabilité)",
-        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Arômes Artisanal 🎨",
-        coffeeConceptText: "Comprendre les notes complexes du café.",
-        mlConceptTitle: "Explicabilité 🔬",
-        mlConceptText: "LIME/SHAP pour expliquer décisions de modèles complexes."
-      },
+  // 8. Éthique & IA Responsable (3 steps)
+  {
+    categoryTitle: "Éthique & IA Responsable",
+    title: "Certification Commerce Équitable (AI Éthique)",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwC5eI1it4wm2sO6FJPvEOW-F2EUN7qp1PhgDs2MzzG9qb21YbMOHzCS06CyO6v2llkSI&usqp=CAU?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Café Équitable 🌍",
+    coffeeConceptText: "L'approvisionnement équitable garantit un salaire correct pour les fermiers et préserve l'environnement.",
+    mlConceptTitle: "IA Éthique & Équitable ⚖️",
+    mlConceptText: "Des modèles sans biais et transparents renforcent la confiance et respectent tous les utilisateurs.",
+    example: "Analyser l’impact du modèle sur différents groupes pour éviter les discriminations."
+  },
+  {
+    categoryTitle: "Éthique & IA Responsable",
+    title: "Santé & Sécurité Client (Sécurité & Confidentialité)",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJCGljt4kVYED10RwkgDQAckMLfmuKN2AA0w&s?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Santé & Sécurité 🏥",
+    coffeeConceptText: "Respecter les normes sanitaires pour un café sûr.",
+    mlConceptTitle: "Sécurité & Confidentialité 🛡️",
+    mlConceptText: "Chiffrer les données et restreindre l'accès protège la vie privée des utilisateurs."
+  },
+  {
+    categoryTitle: "Éthique & IA Responsable",
+    title: "Artisanal vs Industriel (Explicabilité)",
+    image: "https://redmugcoffee.b-cdn.net/wp-content/uploads/Blog/Percolator-vs-Drip-Coffee-Maker/percolator-vs-drip-coffee-maker-2-768x512.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Arômes Artisanal 🎨",
+    coffeeConceptText: "Certains clients aiment comprendre les notes aromatiques de leur café.",
+    mlConceptTitle: "Explicabilité 🔬",
+    mlConceptText: "Utiliser LIME/SHAP pour expliquer les décisions de modèles complexes, aidant à comprendre ‘pourquoi’."
+  },
 
-      // 9. Fin de Vie & Retraite du Modèle (1 step)
-      {
-        categoryTitle: "Fin de Vie & Retraite du Modèle",
-        title: "Rotation du Menu (Retraite & Archivage)",
-        image: "https://images.unsplash.com/photo-1600880292211-31ca5579f8e7?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Mélanges Saisonniers 🍂",
-        coffeeConceptText: "Lorsque les grains manquent, changer le menu.",
-        mlConceptTitle: "Retraite & Archivage 📦",
-        mlConceptText: "Retirer modèles obsolètes, archiver pour référence.",
-        example: "Désactiver un modèle saisonnier après les fêtes."
-      },
+  // 9. Fin de Vie & Retraite du Modèle (1 step)
+  {
+    categoryTitle: "Fin de Vie & Retraite du Modèle",
+    title: "Rotation du Menu (Retraite & Archivage)",
+    image: "https://i.ytimg.com/vi/X07aUwzANrU/maxresdefault.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Mélanges Saisonniers 🍂",
+    coffeeConceptText: "Quand un mélange n'est plus dispo, on le remplace par une nouveauté.",
+    mlConceptTitle: "Retraite & Archivage 📦",
+    mlConceptText: "Retirer les modèles obsolètes et les archiver pour référence, comme changer un café saisonnier après la période.",
+    example: "Désactiver le modèle des ventes de Noël après les fêtes."
+  },
 
-      // 10. Innovation Continue & Gestion des Connaissances (2 steps)
-      {
-        categoryTitle: "Innovation Continue & Gestion des Connaissances",
-        title: "Explorer de Nouvelles Saveurs (Nouvelles Architectures)",
-        image: "https://images.unsplash.com/photo-1551270101-0466f6c56f34?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Nouvelles Recettes ☕️✨",
-        coffeeConceptText: "Essayer de nouveaux mélanges, épices, méthodes.",
-        mlConceptTitle: "Nouvelles Architectures ML 🤖🌱",
-        mlConceptText: "Tester Transformers, GNNs pour améliorer les performances.",
-        example: "Passer d'une Forêt Aléatoire à un modèle BERT."
-      },
-      {
-        categoryTitle: "Innovation Continue & Gestion des Connaissances",
-        title: "Documenter & Partager (Apprentissage Organisationnel)",
-        image: "https://images.unsplash.com/photo-1535317631807-e7faf4f2d7eb?auto=format&fit=crop&w=200&q=80",
-        coffeeConceptTitle: "Former les Baristas & Recettes 📜",
-        coffeeConceptText: "Noter procédures, aider les nouveaux baristas.",
-        mlConceptTitle: "Gestion des Connaissances & Wikis 📚",
-        mlConceptText: "Documenter infra, standards de code, guides déploiement.",
-        example: "Une page wiki interne pour CI/CD modèle."
-      }
-    ];
+  // 10. Innovation Continue & Gestion des Connaissances (2 steps)
+  {
+    categoryTitle: "Innovation Continue & Gestion des Connaissances",
+    title: "Explorer de Nouvelles Saveurs (Nouvelles Architectures)",
+    image: "https://lovelypackage.com/wp-content/uploads/2024/05/9-droptt-lovely-package.jpg?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Nouvelles Recettes ☕️✨",
+    coffeeConceptText: "Tester de nouveaux grains ou modes d'infusion pour surprendre agréablement les clients.",
+    mlConceptTitle: "Nouvelles Architectures ML 🤖🌱",
+    mlConceptText: "Essayer des modèles plus avancés (Transformers, GNNs) pour améliorer la performance.",
+    example: "Passer d'une Forêt Aléatoire à un modèle BERT pour mieux traiter le texte."
+  },
+  {
+    categoryTitle: "Innovation Continue & Gestion des Connaissances",
+    title: "Documenter & Partager (Apprentissage Organisationnel)",
+    image: "https://easyhealthandsafety.com/cdn/shop/files/friends-in-coffee-shop-enjoying-coffee-together.jpg?v=1697471310&width=3840?auto=format&fit=crop&q=80",
+    coffeeConceptTitle: "Former les Baristas & Recettes 📜",
+    coffeeConceptText: "En notant les recettes et méthodes, les nouveaux baristas apprennent vite.",
+    mlConceptTitle: "Gestion des Connaissances & Wikis 📚",
+    mlConceptText: "Documenter les setups, standards et guides de déploiement aide l'équipe ML à progresser sans réinventer la roue.",
+    example: "Une page wiki interne expliquant le pipeline CI/CD facilite l'intégration des nouveaux."
+  }
+  ];
 
     let currentStep = 1;
     let stepsData = stepsDataEN; 
@@ -901,7 +975,9 @@
         stepDiv.innerHTML = `
           <div class="step-card animate__fadeInUp">
             <div class="category-title">${step.categoryTitle}</div>
-            <img src="${step.image}" alt="Step ${stepNumber} Image" class="step-image" />
+            <div class="step-image-container">
+              <img src="${step.image}" alt="Step ${stepNumber} Image" class="step-image" />
+            </div>
             <h2 class="step-title">${step.title}</h2>
             <div class="two-col">
               <div class="col-concept">
@@ -948,6 +1024,78 @@
       }
     }
 
+    function showConclusion() {
+      const stepsContainer = document.getElementById('steps-container');
+      const progressInfo = document.querySelector('.progress-info');
+      const navButtons = document.querySelector('.nav-buttons');
+      
+      // Hide progress and navigation
+      progressInfo.style.display = 'none';
+      navButtons.style.display = 'none';
+
+      // Create conclusion content
+      const conclusionHTML = `
+        <div class="conclusion-container animate__animated animate__fadeIn">
+          <h1 class="conclusion-title">🎓 Congratulations on Completing Your MLOps Journey!</h1>
+          
+          <div class="conclusion-image-container">
+            <img src="DS_lifecycle.jpg" alt="Data Science Lifecycle" class="conclusion-image">
+          </div>
+
+          <p class="conclusion-text">
+            Throughout this journey, we've explored how the art of coffee-making perfectly mirrors 
+            the complexities of MLOps and the Data Science lifecycle. Just as creating the perfect cup 
+            of coffee requires careful attention at every step, building and deploying ML systems demands 
+            meticulous care throughout the entire process.
+          </p>
+
+          <h3>Key Learning Points:</h3>
+          <ul class="learning-points">
+            <li><strong>Data Collection & Governance:</strong> Like selecting premium coffee beans, 
+            we learned the importance of quality data sourcing and proper governance.</li>
+            
+            <li><strong>Data Preparation & Feature Engineering:</strong> Similar to grinding and 
+            preparing coffee beans, we explored how to transform raw data into meaningful features.</li>
+            
+            <li><strong>Model Development & Training:</strong> Just as brewing requires precise 
+            control, we covered the intricacies of model development and training processes.</li>
+            
+            <li><strong>Deployment & Serving:</strong> Like serving the perfect cup of coffee, 
+            we learned how to deploy models effectively and serve predictions reliably.</li>
+            
+            <li><strong>Monitoring & Maintenance:</strong> As with maintaining coffee quality, 
+            we explored how to monitor model performance and maintain system health.</li>
+            
+            <li><strong>Continuous Improvement:</strong> Like perfecting your coffee-making technique, 
+            we discussed the importance of iterative improvement in MLOps.</li>
+          </ul>
+
+          <p class="conclusion-text">
+            The image above illustrates the complete Data Science lifecycle, showing how each step 
+            we've covered fits into the bigger picture of MLOps and production machine learning.
+          </p>
+
+          <button class="restart-button" onclick="restartJourney()">Start Journey Again</button>
+        </div>
+      `;
+
+      stepsContainer.innerHTML = conclusionHTML;
+    }
+
+    function restartJourney() {
+      currentStep = 1;
+      const progressInfo = document.querySelector('.progress-info');
+      const navButtons = document.querySelector('.nav-buttons');
+      
+      // Show progress and navigation again
+      progressInfo.style.display = 'block';
+      navButtons.style.display = 'block';
+      
+      // Reset and show first step
+      renderSteps();
+      showStep(1);
+    }
+
     document.getElementById('prev-btn').addEventListener('click', () => {
       if (currentStep > 1) {
         currentStep--;
@@ -960,11 +1108,7 @@
         currentStep++;
         showStep(currentStep);
       } else {
-        if (currentLang === "EN") {
-          alert('🎉 Congratulations! You have completed the full MLOps coffee journey! ☕️🤖');
-        } else {
-          alert('🎉 Félicitations ! Vous avez complété ce voyage MLOps inspiré par le café ! ☕️🤖');
-        }
+        showConclusion();
       }
     });
   </script>
